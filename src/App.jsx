@@ -34,6 +34,24 @@ function App() {
     alert(`le produite avec l'id ${datas.id} a bien été ajouté`);
   }
 
+  async function updateProduct(product) {
+    const res = await fetch(`https://fakestoreapi.com/products/${product.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: "Nouveau produit",
+        price: 29.99,
+        description: "Un super produit ajouté via API",
+        image: "https://via.placeholder.com/150",
+        category: "electronics",
+      }),
+    });
+    const datas = await res.json();
+    alert(`le produite avec l'id ${datas.id} a bien été modifié`);
+  }
+
   return (
     products && (
       <Container className="my-4">
@@ -52,6 +70,11 @@ function App() {
                   <Card.Text>{product.description}</Card.Text>
                   <Card.Text>{product.price}€</Card.Text>
                 </Card.Body>
+                <CardFooter>
+                  <Button onClick={() => updateProduct(product)}>
+                    Modifier le produit
+                  </Button>
+                </CardFooter>
               </Card>
             </Col>
           ))}
