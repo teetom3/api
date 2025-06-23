@@ -31,7 +31,7 @@ function App() {
       }),
     });
     const datas = await res.json();
-    alert(`le produite avec l'id ${datas.id} a bien été ajouté`);
+    alert(`le produit avec l'id ${datas.id} a bien été ajouté`);
   }
 
   async function updateProduct(product) {
@@ -49,7 +49,21 @@ function App() {
       }),
     });
     const datas = await res.json();
-    alert(`le produite avec l'id ${datas.id} a bien été modifié`);
+    alert(`le produit avec l'id ${datas.id} a bien été modifié`);
+  }
+
+  async function updatePriceProduct(product) {
+    const res = await fetch(`https://fakestoreapi.com/products/${product.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        price: 29.99,
+      }),
+    });
+    const datas = await res.json();
+    alert(`le prix du produit avec l'id ${datas.id} a bien été modifié`);
   }
 
   return (
@@ -73,6 +87,12 @@ function App() {
                 <CardFooter>
                   <Button onClick={() => updateProduct(product)}>
                     Modifier le produit complet
+                  </Button>
+                  <Button
+                    className="my-1"
+                    onClick={() => updatePriceProduct(product)}
+                  >
+                    Modifier le prix du produit
                   </Button>
                 </CardFooter>
               </Card>
