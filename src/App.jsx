@@ -36,7 +36,7 @@ function App() {
 
   async function updateProduct(product) {
     const res = await fetch(`https://fakestoreapi.com/products/${product.id}`, {
-      method: "PATCH",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
@@ -72,7 +72,7 @@ function App() {
                 </Card.Body>
                 <CardFooter>
                   <Button onClick={() => updateProduct(product)}>
-                    Modifier le produit
+                    Modifier le produit complet
                   </Button>
                 </CardFooter>
               </Card>
