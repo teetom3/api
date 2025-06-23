@@ -24,7 +24,6 @@ function App() {
             <Col key={product.id}>
               <Card className="h-100">
                 <Card.Img
-                  className="w-100"
                   variant="top"
                   src={product.image}
                   alt={`Image du produit ${product.title}`}
