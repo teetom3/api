@@ -22,8 +22,9 @@ function App() {
         <Row xs={1} md={4} className="g-4">
           {products.map((product) => (
             <Col key={product.id}>
-              <Card>
+              <Card className="h-100">
                 <Card.Img
+                  className="w-100"
                   variant="top"
                   src={product.image}
                   alt={`Image du produit ${product.title}`}
