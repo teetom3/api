@@ -66,6 +66,13 @@ function App() {
     alert(`le prix du produit avec l'id ${datas.id} a bien été modifié`);
   }
 
+  async function deleteProduct(product) {
+    const res = await fetch(`https://fakestoreapi.com/products/${product.id}`, {
+      method: "DELETE",
+    });
+    const datas = await res.json();
+    alert(`le produit avec l'id ${datas.id} a bien été supprimé`);
+  }
   return (
     products && (
       <Container className="my-4">
@@ -93,6 +100,13 @@ function App() {
                     onClick={() => updatePriceProduct(product)}
                   >
                     Modifier le prix du produit
+                  </Button>
+                  <Button
+                    className="my-1"
+                    variant="danger"
+                    onClick={() => deleteProduct(product)}
+                  >
+                    Supprimer le produit
                   </Button>
                 </CardFooter>
               </Card>
