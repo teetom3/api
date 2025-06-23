@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card } from "react-bootstrap";
+import { Card, Col, Container, Row } from "react-bootstrap";
 import "./App.css";
 
 function App() {
@@ -18,21 +18,26 @@ function App() {
 
   return (
     products && (
-      <div className="product_grid">
-        {products.map((product) => (
-          <Card style={{ width: "auto" }}>
-            <Card.Img
-              variant="top"
-              style={{ height: "350px" }}
-              src={product.image}
-            />
-            <Card.Body>
-              <Card.Title>{product.title}</Card.Title>
-              <Card.Text>{product.description}</Card.Text>
-            </Card.Body>
-          </Card>
-        ))}
-      </div>
+      <Container>
+        <Row xs={1} md={4} className="g-4">
+          {products.map((product) => (
+            <Col key={product.id}>
+              <Card>
+                <Card.Img
+                  variant="top"
+                  src={product.image}
+                  alt={`Image du produit ${product.title}`}
+                />
+                <Card.Body>
+                  <Card.Title>{product.title}</Card.Title>
+                  <Card.Text>{product.description}</Card.Text>
+                  <Card.Text>{product.price}€</Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </Container>
     )
   );
 }
