@@ -18,7 +18,7 @@ function App() {
 
   return (
     products && (
-      <Container>
+      <Container className="my-4">
         <Row xs={1} md={4} className="g-4">
           {products.map((product) => (
             <Col key={product.id}>
