@@ -34,11 +34,6 @@ function App() {
     fetchProduct();
   }, []);
 
-  // Affichage du message d'erreur si une erreur est survenue
-  if (error) return <p>Erreur : {error}</p>;
-  // Affichage d'un message de chargement tant que les données ne sont pas disponibles
-  if (loading) return <p>Chargement...</p>;
-
   async function createProduct() {
     try {
       const res = await fetch("https://fakestoreapi.com/products", {
@@ -54,10 +49,17 @@ function App() {
           category: "electronics",
         }),
       });
+      if (!response.ok) {
+        throw new Error(
+          `Erreur HTTP: ${
+            response.statusText ? response.statusText + " - " : ""
+          }${response.status}`
+        );
+      }
       const datas = await res.json();
       alert(`le produit avec l'id ${datas.id} a bien été ajouté`);
     } catch (err) {
-      setError("Une erreur est survenue lors de l'ajout du produit'."); // Client
+      alert("Une erreur est survenue lors de l'ajout du produit'."); // Client
       console.error(err.message); // Développeur
     }
   }
@@ -80,10 +82,17 @@ function App() {
           }),
         }
       );
+      if (!response.ok) {
+        throw new Error(
+          `Erreur HTTP: ${
+            response.statusText ? response.statusText + " - " : ""
+          }${response.status}`
+        );
+      }
       const datas = await res.json();
       alert(`le produit avec l'id ${datas.id} a bien été modifié`);
     } catch (err) {
-      setError("Une erreur est survenue lors de la modification du produit'."); // Client
+      alert("Une erreur est survenue lors de la modification du produit'."); // Client
       console.error(err.message); // Développeur
     }
   }
@@ -102,10 +111,17 @@ function App() {
           }),
         }
       );
+      if (!response.ok) {
+        throw new Error(
+          `Erreur HTTP: ${
+            response.statusText ? response.statusText + " - " : ""
+          }${response.status}`
+        );
+      }
       const datas = await res.json();
       alert(`le prix du produit avec l'id ${datas.id} a bien été modifié`);
     } catch (err) {
-      setError(
+      alert(
         "Une erreur est survenue lors de la modification du prix du produit'."
       ); // Client
       console.error(err.message); // Développeur
@@ -120,13 +136,26 @@ function App() {
           method: "DELETE",
         }
       );
+      if (!response.ok) {
+        throw new Error(
+          `Erreur HTTP: ${
+            response.statusText ? response.statusText + " - " : ""
+          }${response.status}`
+        );
+      }
       const datas = await res.json();
       alert(`le produit avec l'id ${datas.id} a bien été supprimé`);
     } catch (err) {
-      setError("Une erreur est survenue lors de la suppression du produit");
+      alert("Une erreur est survenue lors de la suppression du produit");
       console.error(err.message);
     }
   }
+
+  // Affichage du message d'erreur si une erreur est survenue
+  if (error) return <p>Erreur : {error}</p>;
+  // Affichage d'un message de chargement tant que les données ne sont pas disponibles
+  if (loading) return <p>Chargement...</p>;
+
   return (
     products && (
       <Container className="my-4">
